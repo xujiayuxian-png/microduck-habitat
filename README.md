@@ -10,6 +10,7 @@
 
 <p align="center">
   <a href="https://github.com/xujiayuxian-png/microduck-habitat/releases"><img src="https://img.shields.io/github/v/release/xujiayuxian-png/microduck-habitat?display_name=tag&sort=semver" alt="Latest release"></a>
+  <a href="https://xujiayuxian-png.github.io/microduck-habitat/play/"><img src="https://img.shields.io/badge/try-interactive_demo-ffd43b" alt="Try the interactive web demo"></a>
   <img src="https://img.shields.io/badge/Node.js-22-5FA04E?logo=nodedotjs&logoColor=white" alt="Node.js 22">
   <img src="https://img.shields.io/badge/Electron-44-47848F?logo=electron&logoColor=white" alt="Electron 44">
   <a href="LICENSE"><img src="https://img.shields.io/badge/license-Apache--2.0-blue" alt="Apache-2.0 license"></a>
@@ -27,6 +28,8 @@ mesh, joint hierarchy and voice character without starting or emulating any robo
 
 Each seeded duck develops its own temperament and trust. It watches the pointer, responds to touch,
 rests, preens, wanders around the desktop and independently explores a small calibration bench.
+
+**[Try Microduck directly in your browser →](https://xujiayuxian-png.github.io/microduck-habitat/play/)**
 
 ## Highlights
 

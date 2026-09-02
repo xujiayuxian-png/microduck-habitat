@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="color-scheme" content="dark">
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; connect-src 'self'; img-src 'self' data:; media-src 'none'; object-src 'none'; frame-src 'none'; base-uri 'none'"
+    >
+    <title>Play with Microduck</title>
+  </head>
+  <body>
+    <main id="habitat" aria-label="Interactive Microduck Habitat">
+      <canvas id="world"></canvas>
+      <div id="presence" role="status" aria-live="polite"></div>
+      <nav id="controls" aria-label="Habitat controls">
+        <button id="menu-toggle" type="button" title="Microduck controls" aria-label="Microduck controls" aria-expanded="false"></button>
+        <div id="control-actions">
+          <button id="quiet" type="button" title="Quiet mode" aria-label="Quiet mode"></button>
+          <button id="rest" type="button" title="Let Microduck rest" aria-label="Let Microduck rest"></button>
+          <button id="bench" type="button" title="Open the calibration bench" aria-label="Open the calibration bench"></button>
+          <button id="home" type="button" aria-hidden="true" tabindex="-1"></button>
+          <button id="close" type="button" aria-hidden="true" tabindex="-1"></button>
+        </div>
+      </nav>
+      <div id="drag-handle" aria-hidden="true"></div>
+    </main>
+    <script type="module" src="./web-entry.ts"></script>
+  </body>
+</html>

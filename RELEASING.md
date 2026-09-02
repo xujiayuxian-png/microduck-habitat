@@ -10,7 +10,8 @@ manual; pushing a tag does not start CI or create a GitHub Release.
 2. Set the intended semantic version in `package.json` and `package-lock.json` with
    `npm version <version> --no-git-tag-version`.
 3. Review `README.md`, `THIRD_PARTY.md` and the changelog text intended for GitHub Releases.
-4. Run the core checks below and commit the version change.
+4. Regenerate the committed browser demo with `npm run build:web`.
+5. Run the core checks below and commit the version change.
 
 All platforms require Node.js 22 and npm 10 or newer:
 

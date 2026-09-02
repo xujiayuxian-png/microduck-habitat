@@ -52,18 +52,22 @@
 
       <section class="demo shell" aria-labelledby="demo-title">
         <div class="demo-copy">
-          <p class="eyebrow">See it move</p>
-          <h2 id="demo-title">A little machine<br>with a mind of its own.</h2>
+          <p class="eyebrow">Try it here</p>
+          <h2 id="demo-title">Meet a Microduck<br>with a mind of its own.</h2>
           <p>
-            Microduck follows your attention, reacts when touched and changes its behavior as its
-            internal state evolves. The footage is captured directly from the application.
+            Move your pointer around, click Microduck, or open the upper-right menu to request a
+            rest and visit the workbench. This is the real model and behavior engine running in
+            your browser; its memory stays in local storage.
           </p>
         </div>
         <div class="demo-frame">
-          <video autoplay muted loop playsinline controls preload="metadata" poster="images/workbench.png">
-            <source src="media/microduck-demo.webm" type="video/webm">
-            Your browser does not support embedded WebM video.
-          </video>
+          <iframe
+            src="play/"
+            title="Interactive Microduck Habitat demo"
+            loading="eager"
+            sandbox="allow-scripts allow-same-origin"
+          ></iframe>
+          <a class="demo-link" href="play/">Open the interactive demo full screen →</a>
         </div>
       </section>
 

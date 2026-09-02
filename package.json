@@ -27,6 +27,7 @@
     "dev": "electron-vite dev",
     "prebuild": "npm run verify:assets",
     "build": "electron-vite build",
+    "build:web": "vite build --config vite.web.config.ts",
     "verify:assets": "node scripts/verify-assets.mjs",
     "audit:dependencies": "node scripts/audit-dependencies.mjs",
     "typecheck": "tsc --noEmit -p tsconfig.json && tsc --noEmit -p tsconfig.node.json",
