@@ -109,6 +109,11 @@
     "mac": {
       "category": "public.app-category.entertainment",
       "icon": "icon.png",
+      "identity": "Jiayu Xu (SW995Z7N9W)",
+      "hardenedRuntime": true,
+      "gatekeeperAssess": false,
+      "entitlements": "build/entitlements.mac.plist",
+      "entitlementsInherit": "build/entitlements.mac.plist",
       "target": [
         {
           "target": "dmg",
