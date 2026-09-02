@@ -1,0 +1,110 @@
+name: ci
+
+on:
+  push:
+    branches: [main]
+    tags: ['v*']
+  pull_request:
+  workflow_dispatch:
+
+concurrency:
+  group: habitat-${{ github.ref }}
+  cancel-in-progress: ${{ !startsWith(github.ref, 'refs/tags/') }}
+
+permissions:
+  contents: read
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npm run audit:dependencies
+      - run: npm run typecheck
+      - run: npm test
+      - name: Real Electron render and interaction smoke test
+        run: xvfb-run -a npm run smoke
+      - name: Render every high-level activity
+        run: xvfb-run -a npm run capture:activities
+
+  package:
+    needs: check
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-latest]
+    runs-on: ${{ matrix.os }}
+    env:
+      CSC_IDENTITY_AUTO_DISCOVERY: 'false'
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npm run dist
+      - run: npm run verify:package
+      - if: runner.os == 'Linux'
+        run: xvfb-run -a npm run verify:launch
+      - if: runner.os == 'Linux'
+        run: xvfb-run -a npm run verify:appimage
+      - if: runner.os != 'Linux'
+        run: npm run verify:launch
+      - uses: actions/upload-artifact@v4
+        with:
+          name: microduck-habitat-${{ runner.os }}
+          path: |
+            release/*.AppImage
+            release/*.deb
+            release/*.exe
+            release/*.dmg
+            release/*.zip
+          if-no-files-found: error
+
+  evidence:
+    needs: package
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - uses: actions/download-artifact@v4
+        with:
+          pattern: microduck-habitat-*
+          path: release
+          merge-multiple: true
+      - run: npm run release:evidence
+      - run: npm run verify:evidence
+      - uses: actions/upload-artifact@v4
+        with:
+          name: microduck-habitat-release-evidence
+          path: |
+            release/SHA256SUMS
+            release/release-manifest.json
+            release/*.spdx.json
+          if-no-files-found: error
+
+  draft-release:
+    if: startsWith(github.ref, 'refs/tags/v')
+    needs: [package, evidence]
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          pattern: microduck-habitat-*
+          path: release
+          merge-multiple: true
+      - name: Create an unsigned draft release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh release create "$GITHUB_REF_NAME" release/* --draft --generate-notes --title "Microduck Habitat $GITHUB_REF_NAME"

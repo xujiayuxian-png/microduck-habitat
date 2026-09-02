@@ -1,0 +1,10 @@
+node_modules/
+out/
+release/
+artifacts/
+
+# Internal planning and handoff notes are kept locally, not published.
+DEVELOPMENT_SUMMARY.zh-CN.md
+PRODUCT_AND_REPOSITORY_PLAN.zh-CN.md
+REPOSITORY.md
+INTELLIGENCE.md

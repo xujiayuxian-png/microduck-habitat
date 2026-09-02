@@ -1,0 +1,149 @@
+{
+  "name": "microduck-habitat",
+  "version": "0.1.0",
+  "description": "A small Microduck that lives on your desktop.",
+  "author": {
+    "name": "xujiayu",
+    "url": "https://github.com/xujiayuxian-png"
+  },
+  "desktopName": "microduck-habitat.desktop",
+  "homepage": "https://github.com/xujiayuxian-png/microduck-habitat#readme",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/xujiayuxian-png/microduck-habitat.git"
+  },
+  "bugs": {
+    "url": "https://github.com/xujiayuxian-png/microduck-habitat/issues"
+  },
+  "private": true,
+  "license": "Apache-2.0",
+  "engines": {
+    "node": ">=22 <23",
+    "npm": ">=10"
+  },
+  "packageManager": "npm@10.9.3",
+  "main": "out/main/main.js",
+  "scripts": {
+    "dev": "electron-vite dev",
+    "prebuild": "npm run verify:assets",
+    "build": "electron-vite build",
+    "verify:assets": "node scripts/verify-assets.mjs",
+    "audit:dependencies": "node scripts/audit-dependencies.mjs",
+    "typecheck": "tsc --noEmit -p tsconfig.json && tsc --noEmit -p tsconfig.node.json",
+    "test": "vitest run",
+    "smoke": "npm run build && node tests/electron-smoke.mjs",
+    "capture:activities": "npm run build && node scripts/capture-activities.mjs",
+    "verify:package": "node scripts/verify-package.mjs",
+    "verify:launch": "node scripts/verify-launch.mjs",
+    "verify:appimage": "node scripts/verify-launch.mjs --appimage",
+    "release:evidence": "node scripts/create-release-evidence.mjs",
+    "verify:evidence": "node scripts/verify-release-evidence.mjs",
+    "icon": "npm run build && node scripts/create-icon.mjs",
+    "preview": "electron-vite preview",
+    "pack": "npm run build && electron-builder --dir",
+    "dist": "npm run build && electron-builder"
+  },
+  "dependencies": {
+    "lucide": "^0.542.0",
+    "three": "^0.179.1"
+  },
+  "devDependencies": {
+    "@electron/fuses": "^1.8.0",
+    "@types/node": "^22.18.0",
+    "@types/three": "^0.179.0",
+    "electron": "44.1.0",
+    "electron-builder": "^26.0.12",
+    "electron-vite": "^4.0.0",
+    "playwright-core": "^1.62.1",
+    "typescript": "^5.9.2",
+    "vite": "^7.1.3",
+    "vitest": "^3.2.4"
+  },
+  "build": {
+    "appId": "io.github.xujiayuxian-png.microduck-habitat",
+    "productName": "Microduck Habitat",
+    "artifactName": "microduck-habitat-${version}-${os}-${arch}.${ext}",
+    "directories": {
+      "output": "release",
+      "buildResources": "resources"
+    },
+    "files": [
+      "out/**/*",
+      "package.json"
+    ],
+    "asar": true,
+    "electronFuses": {
+      "runAsNode": false,
+      "enableCookieEncryption": true,
+      "enableNodeOptionsEnvironmentVariable": false,
+      "enableNodeCliInspectArguments": false,
+      "enableEmbeddedAsarIntegrityValidation": true,
+      "onlyLoadAppFromAsar": true,
+      "grantFileProtocolExtraPrivileges": true
+    },
+    "extraResources": [
+      {
+        "from": "resources/icon.png",
+        "to": "icon.png"
+      },
+      {
+        "from": "LICENSE",
+        "to": "LICENSE.txt"
+      },
+      {
+        "from": "THIRD_PARTY.md",
+        "to": "THIRD_PARTY.md"
+      },
+      {
+        "from": "node_modules/three/LICENSE",
+        "to": "licenses/three-MIT.txt"
+      },
+      {
+        "from": "node_modules/lucide/LICENSE",
+        "to": "licenses/lucide-ISC.txt"
+      }
+    ],
+    "mac": {
+      "category": "public.app-category.entertainment",
+      "icon": "icon.png",
+      "target": [
+        {
+          "target": "dmg",
+          "arch": [
+            "x64",
+            "arm64"
+          ]
+        },
+        {
+          "target": "zip",
+          "arch": [
+            "x64",
+            "arm64"
+          ]
+        }
+      ]
+    },
+    "win": {
+      "icon": "icon.png",
+      "target": "nsis"
+    },
+    "linux": {
+      "category": "Game",
+      "synopsis": "A virtual Microduck desktop pet",
+      "icon": "icon.png",
+      "maintainer": "xujiayu <xujiayuxian@gmail.com>",
+      "syncDesktopName": true,
+      "target": [
+        "AppImage",
+        "deb"
+      ]
+    },
+    "deb": {
+      "packageCategory": "games"
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true
+    }
+  }
+}
