@@ -26,8 +26,15 @@ async function capturePair() {
   const fixture = await launch({ bench: false })
   try {
     const { page } = fixture
-    await page.addStyleTag({ content: backdrop })
+    const hiddenChrome = await page.addStyleTag({
+      content: '#controls, #drag-handle, #presence { display: none !important; }',
+    })
     await page.waitForTimeout(1_000)
+    await page.screenshot({ path: join(output, 'mascot.png'), omitBackground: true })
+    await hiddenChrome.evaluate((element) => element.remove())
+
+    await page.addStyleTag({ content: backdrop })
+    await page.waitForTimeout(300)
     await page.screenshot({ path: join(output, 'habitat.png') })
 
     await page.locator('#menu-toggle').click()

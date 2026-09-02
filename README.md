@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="resources/icon.png" width="112" alt="Microduck Habitat icon">
+  <img src="docs/images/mascot.png" width="160" alt="Microduck Habitat mascot">
 </p>
 
 <h1 align="center">Microduck Habitat</h1>
