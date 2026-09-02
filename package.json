@@ -44,7 +44,7 @@
     "dist": "npm run build && electron-builder"
   },
   "dependencies": {
-    "lucide": "^0.542.0",
+    "lucide": "^1.37.0",
     "three": "^0.179.1"
   },
   "devDependencies": {
