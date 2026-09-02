@@ -49,7 +49,7 @@
   },
   "devDependencies": {
     "@electron/fuses": "^1.8.0",
-    "@types/node": "^22.18.0",
+    "@types/node": "^26.4.0",
     "@types/three": "^0.179.0",
     "electron": "44.1.0",
     "electron-builder": "^26.0.12",
