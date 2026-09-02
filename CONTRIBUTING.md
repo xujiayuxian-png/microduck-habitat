@@ -16,9 +16,9 @@ npm test
 npm run smoke
 ```
 
-`npm run smoke` opens a real Electron process and needs a graphical session. CI supplies Xvfb on
-Linux. Changes to rendering or motion should include an updated smoke assertion or a focused unit
-test in proportion to their risk.
+`npm run smoke` opens a real Electron process and needs a graphical session. On headless Linux, run
+it through Xvfb. Changes to rendering or motion should include an updated smoke assertion or a
+focused unit test in proportion to their risk.
 
 ## Boundaries
 
@@ -44,8 +44,8 @@ real X11 click, drag and transparent-area checks succeed.
 
 ## Releases
 
-Tags named `v*` build Linux, Windows and macOS artifacts and create a draft GitHub release. The
-default workflow deliberately disables code-signing discovery. A maintainer must review the draft
-and clearly identify unsigned artifacts until Windows signing and Apple notarization are configured.
+Releases are currently built and tested manually on Linux, Windows and macOS. Follow
+[`RELEASING.md`](RELEASING.md), create a draft GitHub Release, and clearly identify unsigned
+artifacts until Windows signing and Apple notarization are configured.
 
 Contributions are accepted under the Apache-2.0 license in [`LICENSE`](LICENSE).

@@ -23,7 +23,8 @@ renderer URL; replacing `file://` with an application protocol is a future harde
 Disabling CLI inspection means Playwright cannot attach to the packaged main process by design.
 Renderer WebGL and interaction checks therefore run against the production build with development
 Electron, while `verify:launch` starts the fused executable as an ordinary process and waits for its
-state file. Both checks are required in CI; neither is presented as evidence for the other's layer.
+state file. Both checks are required during release validation; neither is presented as evidence
+for the other's layer.
 
 Release jobs publish `SHA256SUMS`, `release-manifest.json` and an SPDX 2.3 SBOM beside installers.
 `verify:evidence` recomputes the files rather than trusting generated metadata. These unsigned

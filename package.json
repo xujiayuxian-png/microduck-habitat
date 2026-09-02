@@ -33,6 +33,7 @@
     "test": "vitest run",
     "smoke": "npm run build && node tests/electron-smoke.mjs",
     "capture:activities": "npm run build && node scripts/capture-activities.mjs",
+    "capture:readme": "npm run build && node scripts/capture-readme.mjs",
     "verify:package": "node scripts/verify-package.mjs",
     "verify:launch": "node scripts/verify-launch.mjs",
     "verify:appimage": "node scripts/verify-launch.mjs --appimage",
