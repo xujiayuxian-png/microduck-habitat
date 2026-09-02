@@ -45,7 +45,7 @@
   },
   "dependencies": {
     "lucide": "^0.542.0",
-    "three": "^0.179.1"
+    "three": "^0.185.1"
   },
   "devDependencies": {
     "@electron/fuses": "^1.8.0",
