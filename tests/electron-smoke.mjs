@@ -47,9 +47,15 @@ try {
 
   await page.waitForSelector('#world')
   await page.waitForTimeout(1_500)
-  const windowBounds = await browserWindow.evaluate((target) => target.getBounds())
-  if (windowBounds.width !== 240 || windowBounds.height !== 280) {
-    throw new Error(`desktop pet window is not 240x280: ${windowBounds.width}x${windowBounds.height}`)
+  // Windows can round a frameless transparent window by a few device-independent
+  // pixels at non-default display scales. The responsive renderer may grow with
+  // it, but it must never shrink enough to clip the habitat or grow unexpectedly.
+  const contentBounds = await browserWindow.evaluate((target) => target.getContentBounds())
+  if (
+    contentBounds.width < 240 || contentBounds.width > 256 ||
+    contentBounds.height < 280 || contentBounds.height > 296
+  ) {
+    throw new Error(`desktop pet content is outside its responsive bounds: ${contentBounds.width}x${contentBounds.height}`)
   }
   const dragRegion = await page.locator('#drag-handle').evaluate((element) => {
     const rect = element.getBoundingClientRect()
